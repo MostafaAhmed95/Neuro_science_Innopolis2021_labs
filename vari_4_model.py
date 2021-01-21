@@ -43,14 +43,9 @@ v_0 = 10
 w_0 = 2
 x = [v_0,w_0]
 
-t = np.linspace(0,12,20)
-#good result 0,2,10
-#best result 0,2,5
-
-vs_ws = odeint(dvt_dwt, x, t)
-#print(vs_ws.shape)
-#print(vs_ws[:,0])
 #Ploting
+t = np.linspace(0,12,20)
+vs_ws = odeint(dvt_dwt, x, t)
 plt.plot(t,vs_ws[:,0])
 plt.xlabel('time')
 plt.ylabel('v(t)')
