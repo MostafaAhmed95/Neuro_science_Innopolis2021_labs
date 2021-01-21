@@ -1,0 +1,2 @@
+# Neuro_science_Innopolis2021_labs
+Assignments for Innopolis Neuroscience course
