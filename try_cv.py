@@ -3,7 +3,7 @@ from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 
 #contstants
-i_stim = 75
+i_stim = 0
 c = 2
 gleak = 2
 gfast = 20
@@ -33,21 +33,28 @@ def taw_eq(v):
     return taw
 
 def dvt_dwt(x,t):
+    #print(x)
     v,w = x[0],x[1]
-    v = x
+    #v = x
     dv_dt = (i_stim - gfast * m_inf(v)*(v-ena) - gslow * w * (v - ek) - gleak * (v - eleak))/c
     dw_dt = phi_w * ((w_inf(v)-w)/taw_eq(v))
     dtv = dv_dt,dw_dt
-    return dv_dt
+    return dtv
 
 #initial values of v and w
-v_0 = -52.14
+v_0 = -2
 w = 0.02
 x = [v_0,w]
-t = np.linspace(0,12,20)
+t = np.linspace(0,20,10)
+
+#vari the i_stim
+#i_stim = np.linspace(0,200,200)
+#l = dvt_dwt(x,t=0)
 vs_ws = odeint(dvt_dwt, x, t)
+#vs_ws = odeint(dvt_dwt, x, t)
 
 
+print(vs_ws[:,0])
 plt.plot(t,vs_ws[:,0])
 plt.xlabel('time')
 plt.ylabel('v(t)')
