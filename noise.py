@@ -3,10 +3,10 @@ from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 
 #contstants
-#i_stim = 0
+i_stim = 0
 
 #vari the i_stim
-i_stim_vari = np.linspace(0,200,200)
+#i_stim_vari = np.linspace(0,200,200)
 
 c = 2
 gleak = 2
@@ -20,7 +20,7 @@ beta_m = -10
 gamma_m = 18
 beta_w = -10
 gamma_w = 13
-D = 0.1
+D = 0.01
 
 #euations
 def m_inf(v):
@@ -37,11 +37,8 @@ def taw_eq(v):
     return taw
 
 def dvt_dwt(x,t):
-    #i_stim_vari
-    i_stim = i_stim_vari[int ((int(t) * (len(i_stim_vari)-1)) / 20) ]
-
     v,w = x[0],x[1]
-    dv_dt = (i_stim - gfast * m_inf(v)*(v-ena) - gslow * w * (v - ek) - gleak * (v - eleak))/c #+ (D * np.random.normal(0,1))
+    dv_dt = ((i_stim - gfast * m_inf(v)*(v-ena) - gslow * w * (v - ek) - gleak * (v - eleak))/c) #+ (D * np.random.normal(0,0.5))
     dw_dt = phi_w * ((w_inf(v)-w)/taw_eq(v))
     dtv = dv_dt,dw_dt
     return dtv
@@ -50,31 +47,17 @@ def dvt_dwt(x,t):
 v_0 = -2
 w = 0.02
 x = [v_0,w]
-t = np.linspace(0,20,10)
+t = np.linspace(0,20,100)
 
 
 
 vs_ws = odeint(dvt_dwt, x, t)
-
-
-
+#print((D * np.random.normal(0,1,10)).shape)
+vs_ws[:,0] = vs_ws[:,0]+(D * np.random.normal(0,1,100))
+#print(vs_ws[:,0].shape)
 plt.plot(t,vs_ws[:,0],'b')
 plt.xlabel('time')
 plt.ylabel('v(t)')
 
-
-#second plot at beta_m = 0
-beta_m = 0
-vs_ws = odeint(dvt_dwt, x, t)
-plt.plot(t,vs_ws[:,0],'r')
-plt.xlabel('time')
-plt.ylabel('v(t)')
-
-#third plot at beta_m = 20
-beta_m = 20
-vs_ws = odeint(dvt_dwt, x, t)
-plt.plot(t,vs_ws[:,0],'g')
-plt.xlabel('time')
-plt.ylabel('v(t)')
 
 plt.show()
