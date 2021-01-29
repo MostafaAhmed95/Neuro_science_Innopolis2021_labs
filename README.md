@@ -3,10 +3,10 @@ Assignments for Innopolis Neuroscience course
 
 #### Morris–Lecar model
 
-![](https://github.com/MostafaAhmed95/Neuro_science_Innopolis2021_labs/blob/main/2nd_task.png)
+![](https://github.com/MostafaAhmed95/Neuro_science_Innopolis2021_labs/blob/main/Figure_1.png)
 
 ##### Task 2
-![](https://github.com/MostafaAhmed95/Neuro_science_Innopolis2021_labs/blob/main/Figure_1.png)
+![](https://github.com/MostafaAhmed95/Neuro_science_Innopolis2021_labs/blob/main/2nd_task.png)
 
 ##### Task3
 #### at D = 1
